@@ -12,6 +12,7 @@ function Proposal() {
 
       const [voter,setVoter]= useState()
       const [status,setStatus]= useState(0);
+      const [owner,setOwner]= useState(0);
       console.log(contract)
      async function getVoter () {
         try {
@@ -39,12 +40,7 @@ function Proposal() {
      }
      }
 
-     
-
-      useEffect(()=> {
-        getVoter()
-
-     
+     function getStatus () {
         utils.getStatus(contract,accounts).then((result,err)=> {
             if(err){
                 console.log(err);
@@ -53,16 +49,31 @@ function Proposal() {
                 setStatus(result)
             }
         })
-            
-        
-       
-       
-      },[accounts])
+     }
+     function getOwner () {
+        utils.getOwner(contract,accounts).then((result,err)=> {
+            if(err){
+                console.log(err);
+            } else {
+              
+                setOwner(result)
+            }
+        })
+     }
+
+     
+
+      useEffect(()=> {
+        getVoter()
+        getStatus()
+        getOwner()
+    },[accounts])
 
       useEffect(()=> {
        console.log("Voter",voter);
        console.log("status",status)
-      },[voter,status])
+       console.log("status",owner)
+      },[voter,status,owner])
 
   return (
     <Row>
