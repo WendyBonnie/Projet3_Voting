@@ -1,21 +1,14 @@
 import { EthProvider } from "./contexts/EthContext";
-import Intro from "./components/Intro/";
-import Setup from "./components/Setup";
-import Demo from "./components/Demo";
+import RegisterVote from "./components/Vote/RegisterVote";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <EthProvider>
       <div id="App">
-        <div className="container">
-          <Intro />
-          <hr />
-          <Setup />
-          <hr />
-          <Demo />
-          <hr />
-          <Footer />
+        <div>
+          <h1>My new voting Dapp</h1>
+          <RegisterVote />
         </div>
       </div>
     </EthProvider>
