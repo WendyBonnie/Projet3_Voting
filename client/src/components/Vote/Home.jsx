@@ -11,6 +11,7 @@ function Home() {
   } = useEth();
   const [status, setStatus] = useState(0);
   const [proposition, setProposition] = useState("");
+  const [voter, setVoter] = useState({});
 
   const [WorkflowStatus, setWorkflowStatus] = useState([
     "RegisteringVoters",
@@ -54,10 +55,25 @@ function Home() {
     }
   };
 
+  function getVoter() {
+    utils.getVoter(contract, accounts, setVoter).then((result, err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setOwner(result);
+      }
+    });
+  }
+
   useEffect(() => {
+    getVoter();
     getStatus();
     console.log("status home", status);
   }, [accounts, status]);
+
+  useEffect(() => {
+    console.log("voter", voter.isRegistered);
+  }, [voter]);
 
   return (
     <Row>
@@ -74,14 +90,19 @@ function Home() {
           <Col>{WorkflowStatus[status]}</Col>
         </Row>
         <Row>
-          {status == 1 ? (
-            <Col>
-              <h2>Veuillez rentrer une proposition</h2>
-              <input onChange={(e) => setProposition(e.target.value)} />
-              <Button name={"Ajouter ma proposition"} action={addProposal} />
-            </Col>
-          ) : (
+          {status != 1 && voter.isRegistered ? (
             <Col>Les propositions ne sont pas encore ouvertes</Col>
+          ) : status != 1 && !voter.isRegistered ? (
+            <Col>Vous n'êtes pas enregistré</Col>
+          ) : (
+            status == 1 &&
+            voter.isRegistered && (
+              <Col>
+                <h2>Veuillez rentrer une proposition</h2>
+                <input onChange={(e) => setProposition(e.target.value)} />
+                <Button name={"Ajouter ma proposition"} action={addProposal} />
+              </Col>
+            )
           )}
         </Row>
       </Col>
