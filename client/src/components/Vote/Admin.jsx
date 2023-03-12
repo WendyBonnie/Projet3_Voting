@@ -23,17 +23,15 @@ function Admin() {
       }
     } catch (error) {
       console.log(error);
-      console.log(
-        error.message.split(
-          "VM Exception while processing transaction: revert"
-        )[1]
-      );
     }
   };
+
+  const startProposalRegistering = async () => {};
 
   return (
     <Row>
       <Col>
+        <h2>Veuillez rajouter des voteurs</h2>
         <Form>
           <input
             onChange={(e) => setKey(e.target.value)}
@@ -41,9 +39,17 @@ function Admin() {
           />
         </Form>
         <button onClick={addVoter}>Valider</button>
-        <h1>Get Proposal</h1>
-        <h1>Add Proposal</h1>
-        <h1>End proposal registering</h1>
+
+        <h2>Start proposal registering</h2>
+        <Button name={"Start"} />
+        <h2>End proposal registering</h2>
+        <Button name={"Done"} />
+        <h2>Start voting session</h2>
+        <Button name={"Start"} />
+        <h2>end voting session</h2>
+        <Button name={"Done"} />
+        <h2>Tally Vote</h2>
+        <Button name={"Start"} />
       </Col>
     </Row>
   );
