@@ -25,7 +25,30 @@ function Home() {
         setVoter(voter);
       }
     } catch (error) {
-      alert(
+      console.log(
+        error.message.split(
+          "VM Exception while processing transaction: revert"
+        )[1]
+      );
+    }
+  }
+
+  async function startProposal() {
+    try {
+      if (
+        await contract.methods
+          .startProposalsRegistering()
+          .call({ from: accounts[0] })
+      ) {
+        // let start = await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
+        let status = await contract.methods
+          .startProposalsRegistering()
+          .call({ from: accounts[0] });
+        console.log(status);
+      }
+    } catch (error) {
+      console.log(error);
+      console.log(
         error.message.split(
           "VM Exception while processing transaction: revert"
         )[1]
