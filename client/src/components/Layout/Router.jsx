@@ -40,26 +40,6 @@ function Navigation() {
         });
     }
 
-    async function getVoter() {
-        try {
-            if (
-                await contract.methods.getVoter(accounts[0]).call({ from: accounts[0] })
-            ) {
-                let voter = await contract.methods
-                    .getVoter(accounts[0])
-                    .call({ from: accounts[0] });
-
-                setVoter(voter);
-            }
-        } catch (error) {
-            console.log(
-                error.message.split(
-                    "VM Exception while processing transaction: revert"
-                )[1]
-            );
-        }
-    }
-    
 
     useEffect(() => {
         // getVoter();
