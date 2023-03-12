@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function ColorSchemesExample(props) {
   const { owner, accounts, status } = props
@@ -10,21 +10,21 @@ function ColorSchemesExample(props) {
     <Navbar bg="light" variant="light">
       <Container>
 
-        <Link to={"/"}>
+        <NavLink to={"/"}>
           <Navbar.Brand>Home</Navbar.Brand>
-        </Link>
+        </NavLink>
 
         <Nav className="me-auto">
-          {accounts?.includes(owner) ? (<Link to={"/admin"}>
+          {accounts?.includes(owner) ? (<NavLink to={"/admin"}>
             <Nav.Link href="#features">Admin</Nav.Link>
-          </Link>) : null}
+          </NavLink>) : null}
 
-          <Link to={"/voting"}>
+          <NavLink to={"/voting"}>
             <Nav.Link href="#pricing">Voter</Nav.Link>
-          </Link>
-          <Link to={"/tally-vote"}>
+          </NavLink>
+          <NavLink to={"/tally-vote"}>
             <Nav.Link href="#pricing">Résultats</Nav.Link>
-          </Link>
+          </NavLink>
         </Nav>
       </Container>
     </Navbar>

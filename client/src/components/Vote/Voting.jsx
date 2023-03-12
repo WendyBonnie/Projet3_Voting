@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import useEth from "../../contexts/EthContext/useEth";
+import utils from "../utils/utils";
+
+
 
 function Voting() {
+  const {
+    state: { contract, accounts },
+  } = useEth();
+
+
+
+
+  useEffect(() => { console.log(contract) }, [])
+
   return (
     <Row>
       <Col>

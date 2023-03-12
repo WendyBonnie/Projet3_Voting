@@ -1,6 +1,6 @@
 import Footer from "../Footer";
-import Proposal from "../Vote/Proposal";
-import RegisterVote from "../Vote/RegisterVote";
+
+
 import Voting from "../Vote/Voting";
 import TallyVote from "../Vote/TallyVote";
 import Home from "../Vote/Home";
@@ -59,7 +59,7 @@ function Navigation() {
             );
         }
     }
-    //test
+    
 
     useEffect(() => {
         // getVoter();
