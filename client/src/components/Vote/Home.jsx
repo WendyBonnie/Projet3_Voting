@@ -3,12 +3,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import useEth from "../../contexts/EthContext/useEth";
 import utils from "../utils/utils";
+import Button from "../Layout/Button";
 
 function Home() {
   const {
     state: { contract, accounts },
   } = useEth();
   const [status, setStatus] = useState(0);
+  const [proposition, setProposition] = useState("");
+
   const [WorkflowStatus, setWorkflowStatus] = useState([
     "RegisteringVoters",
     "ProposalsRegistrationStarted",
@@ -28,10 +31,33 @@ function Home() {
     });
   }
 
+  const addProposal = async () => {
+    try {
+      if (
+        await contract.methods
+          .addProposal(proposition)
+          .call({ from: accounts[0] })
+      ) {
+        let proposal = await contract.methods
+          .addProposal(proposition)
+          .send({ from: accounts[0] });
+        console.log(proposal);
+        setProposition("");
+      }
+    } catch (error) {
+      console.log(error);
+      alert(
+        error.message.split(
+          "VM Exception while processing transaction: revert"
+        )[1]
+      );
+    }
+  };
+
   useEffect(() => {
     getStatus();
     console.log("status home", status);
-  }, [accounts]);
+  }, [accounts, status]);
 
   return (
     <Row>
@@ -51,7 +77,8 @@ function Home() {
           {status == 1 ? (
             <Col>
               <h2>Veuillez rentrer une proposition</h2>
-              <input />
+              <input onChange={(e) => setProposition(e.target.value)} />
+              <Button name={"Ajouter ma proposition"} action={addProposal} />
             </Col>
           ) : (
             <Col>Les propositions ne sont pas encore ouvertes</Col>
