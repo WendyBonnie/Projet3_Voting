@@ -14,12 +14,20 @@ function Admin() {
   const addVoter = async () => {
     console.log("key", key);
     try {
-      let status = await contract.methods
-        .addVoter("0x22456dd8353c44425A9aB44D8A7b3C997d83D48F")
-        .send({ from: accounts[0] });
-      console.log(status);
+      if (await contract.methods.addVoter(key).call({ from: accounts[0] })) {
+        // let start = await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
+        let status = await contract.methods
+          .addVoter(key)
+          .send({ from: accounts[0] });
+        console.log(status);
+      }
     } catch (error) {
       console.log(error);
+      console.log(
+        error.message.split(
+          "VM Exception while processing transaction: revert"
+        )[1]
+      );
     }
   };
 
