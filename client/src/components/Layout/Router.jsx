@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "../Footer";
 import Proposal from "../Vote/Proposal";
-import RegisterVote from "../Vote/RegisterVote";;
-import Voting from "../Vote/Voting";;
-import TallyVote from "../Vote/TallyVote";;
-import Home from "../Vote/Home";;
-import Admin from "../Vote/Admin";;
+import RegisterVote from "../Vote/RegisterVote";
+import Voting from "../Vote/Voting";
+import TallyVote from "../Vote/TallyVote";
+import Home from "../Vote/Home";
+import Admin from "../Vote/Admin";
 import NavBar from "../Layout/Navbar";
 import utils from "../utils/utils";
 import useEth from "../../contexts/EthContext/useEth";
-
-
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
 
 
 function Navigation() {
@@ -81,10 +79,8 @@ function Navigation() {
             <NavBar owner={owner} accounts={accounts} status={status} />
             <div className="container">
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/admin" exact element={<Admin />} />
-                    <Route path="/proposal" element={<Proposal />} />
-                    <Route path="/registerVote" element={<RegisterVote />} />
+                    <Route path="/" exact element={<Home />} />
+                    <Route path="/admin" element={<Admin />} />
                     <Route path="/voting" element={<Voting />} />
                     <Route path="/tallyVote" element={<TallyVote />} />
                 </Routes>
