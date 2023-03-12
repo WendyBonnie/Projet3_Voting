@@ -5,6 +5,7 @@ const EslintWebpackPlugin = require("eslint-webpack-plugin");
 const extensions = [".js", ".jsx"];
 
 module.exports = {
+
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
   entry: "./src/index.jsx",
   output: {
@@ -12,6 +13,7 @@ module.exports = {
   },
   resolve: { extensions },
   devServer: {
+    historyApiFallback: true,
     client: {
       overlay: false,
     },
