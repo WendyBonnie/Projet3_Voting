@@ -7,6 +7,7 @@ import Voting from "./components/Vote/Voting";
 import TallyVote from "./components/Vote/TallyVote";
 import Home from "./components/Vote/Home";
 import NavBar from "../src/components/Layout/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
