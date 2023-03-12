@@ -113,10 +113,14 @@ function Home() {
   return (
     <Row>
       <Col>
-        <h1>Bienvenue sur le vote du comité d'entreprise Lalaland</h1>
-        <button onClick={startProposal}>
-          Lancer la session enregistrement de proposition
-        </button>
+        <Row>
+          <Col>
+            <h1>Bienvenue sur le vote du comité d'entreprise Lalaland</h1>
+            <button onClick={startProposal}>
+              Lancer la session enregistrement de proposition
+            </button>
+          </Col>
+        </Row>
       </Col>
     </Row>
   );

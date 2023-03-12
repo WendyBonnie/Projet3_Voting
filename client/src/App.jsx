@@ -9,36 +9,24 @@ import Home from "./components/Vote/Home";
 import NavBar from "../src/components/Layout/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/proposal",
-      element: <Proposal />,
-    },
-    {
-      path: "/register-vote",
-      element: <RegisterVote />,
-    },
-    {
-      path: "/voting",
-      element: <Voting />,
-    },
-    {
-      path: "/tally-vote",
-      element: <TallyVote />,
-    },
-  ]);
-
   return (
     <EthProvider>
-      <NavBar />
-      <RouterProvider router={router} />;
+      <Router>
+        <NavBar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/proposal" element={<Proposal />} />
+            <Route path="/registerVote" element={<RegisterVote />} />
+            <Route path="/voting" element={<Voting />} />
+            <Route path="/tallyVote" element={<TallyVote />} />
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
     </EthProvider>
   );
 }

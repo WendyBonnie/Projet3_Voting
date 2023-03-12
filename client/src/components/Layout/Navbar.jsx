@@ -1,21 +1,29 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
 function ColorSchemesExample() {
   return (
-    <>
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-    </>
+    <Navbar bg="light" variant="light">
+      <Container>
+        <Link to={"/"}>
+          <Navbar.Brand>Home</Navbar.Brand>
+        </Link>
+
+        <Nav className="me-auto">
+          <Link>
+            <Nav.Link href="#features">Admin</Nav.Link>
+          </Link>
+          <Link to={"/voting"}>
+            <Nav.Link href="#pricing">Voter</Nav.Link>
+          </Link>
+          <Link to={"/tally-vote"}>
+            <Nav.Link href="#pricing">Résultats</Nav.Link>
+          </Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 }
 
