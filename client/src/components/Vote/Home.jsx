@@ -5,7 +5,7 @@ import useEth from "../../contexts/EthContext/useEth";
 import utils from "../utils/utils";
 
 
-function Proposal() {
+function Home() {
     const {
         state: { contract, accounts },
       } = useEth();
@@ -88,4 +88,4 @@ function Proposal() {
   );
 }
 
-export default Proposal;
+export default Home;
