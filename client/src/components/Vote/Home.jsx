@@ -13,7 +13,7 @@ function Home() {
       const [voter,setVoter]= useState()
       const [status,setStatus]= useState(0);
       const [owner,setOwner]= useState(0);
-      console.log(contract)
+      
      async function getVoter () {
         try {
                 if(await contract.methods.getVoter(accounts[0]).call({ from: accounts[0] })) {
@@ -23,7 +23,7 @@ function Home() {
               }
             } catch (error) {
 
-            alert(error.message.split("VM Exception while processing transaction: revert")[1]);
+            console.log(error.message.split("VM Exception while processing transaction: revert")[1]);
          }
      } 
 
@@ -36,7 +36,7 @@ function Home() {
           }
         } catch (error) {
             console.log(error);
-        alert(error.message.split("VM Exception while processing transaction: revert")[1]);
+            console.log(error.message.split("VM Exception while processing transaction: revert")[1]);
      }
      }
 
@@ -72,7 +72,7 @@ function Home() {
       useEffect(()=> {
        console.log("Voter",voter);
        console.log("status",status)
-       console.log("status",owner)
+       console.log("owner",owner)
       },[voter,status,owner])
 
   return (
