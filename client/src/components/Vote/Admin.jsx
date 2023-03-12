@@ -4,7 +4,8 @@ import Col from "react-bootstrap/Col";
 import Button from '../Layout/Button';
 import Form from 'react-bootstrap/Form';
 
-function Admin() {
+function Admin(props) {
+    
   return (
     <Row>
       <Col>
