@@ -61,7 +61,7 @@ function Navigation() {
             );
         }
     }
-
+    //test
 
     useEffect(() => {
         // getVoter();
@@ -82,7 +82,7 @@ function Navigation() {
             <div className="container">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/admin" element={<Admin />} />
+                    <Route path="/admin" exact element={<Admin />} />
                     <Route path="/proposal" element={<Proposal />} />
                     <Route path="/registerVote" element={<RegisterVote />} />
                     <Route path="/voting" element={<Voting />} />
