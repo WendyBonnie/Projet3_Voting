@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from 'react-bootstrap/Button';
 
-function Button(props) {
+function Button1(props) {
   let { name, action } = props;
   return (
     <Row>
@@ -14,4 +14,4 @@ function Button(props) {
   );
 }
 
-export default Button;
+export default Button1;

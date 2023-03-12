@@ -12,7 +12,7 @@ function ColorSchemesExample() {
         </Link>
 
         <Nav className="me-auto">
-          <Link>
+          <Link to={"/admin"}>
             <Nav.Link href="#features">Admin</Nav.Link>
           </Link>
           <Link to={"/voting"}>

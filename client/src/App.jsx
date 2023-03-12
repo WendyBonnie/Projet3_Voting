@@ -6,6 +6,7 @@ import RegisterVote from "./components/Vote/RegisterVote";
 import Voting from "./components/Vote/Voting";
 import TallyVote from "./components/Vote/TallyVote";
 import Home from "./components/Vote/Home";
+import Admin from "./components/Vote/Admin";
 import NavBar from "../src/components/Layout/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -19,6 +20,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<Admin/>}/>
             <Route path="/proposal" element={<Proposal />} />
             <Route path="/registerVote" element={<RegisterVote />} />
             <Route path="/voting" element={<Voting />} />
