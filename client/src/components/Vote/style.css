@@ -73,6 +73,11 @@ body {
   background-color: rgba(218, 159, 254, 0.5);
 }
 
+/* VOTING */
+
+.divPropal {
+  margin-bottom: 5%;
+}
 /* NAV */
 .nav-link {
   color: #333 !important;
