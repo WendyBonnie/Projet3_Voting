@@ -36,7 +36,8 @@ const utils = {
           .getVoter(accounts[0])
           .call({ from: accounts[0] });
 
-        setVoter(voter);
+        return voter
+
       }
     } catch (error) {
       console.log(

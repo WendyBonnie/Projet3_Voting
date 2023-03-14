@@ -55,14 +55,9 @@ function Home() {
     }
   };
 
-  function getVoter() {
-    utils.getVoter(contract, accounts, setVoter).then((result, err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        setOwner(result);
-      }
-    });
+  async function getVoter() {
+    let voter = await utils.getVoter(contract, accounts, setVoter)
+    setVoter(voter)
   }
 
   useEffect(() => {
@@ -72,7 +67,7 @@ function Home() {
   }, [accounts, status]);
 
   useEffect(() => {
-    console.log("voter", voter.isRegistered);
+    console.log("voter", voter?.isRegistered);
   }, [voter]);
 
   return (
@@ -90,13 +85,13 @@ function Home() {
           <Col>{WorkflowStatus[status]}</Col>
         </Row>
         <Row>
-          {status != 1 && voter.isRegistered ? (
+          {status != 1 && voter?.isRegistered ? (
             <Col>Les propositions ne sont pas encore ouvertes</Col>
-          ) : status != 1 && !voter.isRegistered ? (
+          ) : status != 1 && !voter?.isRegistered ? (
             <Col>Vous n'êtes pas enregistré</Col>
           ) : (
             status == 1 &&
-            voter.isRegistered && (
+            voter?.isRegistered && (
               <Col>
                 <h2>Veuillez rentrer une proposition</h2>
                 <input onChange={(e) => setProposition(e.target.value)} />

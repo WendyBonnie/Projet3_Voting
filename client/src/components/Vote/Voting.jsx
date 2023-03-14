@@ -14,26 +14,21 @@ function Voting() {
   const [voter, setVoter] = useState();
 
   async function getVoter() {
-    utils.getVoter(contract, accounts, setVoter).then((result, err) => {
-      if (err) {
-        console.log(err);
-      }
-    })
+    let voter = await utils.getVoter(contract, accounts, setVoter)
+    setVoter(voter)
   }
-
   useEffect(() => {
-    getVoter
-  })
+    getVoter()
+  }, [])
 
 
-  useEffect(() => { console.log("voter", voter); }, [voter])
+  useEffect(() => { console.log("voter", voter) }, [voter])
 
   return (
     <Row>
       <Col>
-        <h1>Start voting</h1>
+        <h1>Get proposal</h1>
         <h1>voting</h1>
-        <h1>end voting</h1>
       </Col>
     </Row>
   );
