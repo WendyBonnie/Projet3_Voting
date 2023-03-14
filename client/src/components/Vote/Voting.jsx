@@ -102,7 +102,7 @@ function Voting() {
         <h1>Proposition sélectionné: {proposal.description} {proposal != "" && status == 3 && <button onClick={setVoting}>Voter</button>} </h1>
 
 
-        <h1>voting</h1>
+
       </Col>
     </Row>
   );
