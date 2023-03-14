@@ -9,22 +9,22 @@ function ColorSchemesExample(props) {
   return (
     <Navbar bg="light" variant="light">
       <Container>
-        <NavLink to={"/"}>
-          <Navbar.Brand>Home</Navbar.Brand>
+        <NavLink className="nav-link" to={"/"}>
+          <h1>Home</h1>
         </NavLink>
 
         <Nav className="me-auto">
           {accounts?.includes(owner) ? (
             <NavLink to={"/admin"}>
-              <Nav.Link href="#features">Admin</Nav.Link>
+              <h1 className="nav-link">Admin</h1>
             </NavLink>
           ) : null}
 
           <NavLink to={"/voting"}>
-            <Nav.Link href="#pricing">Voter</Nav.Link>
+            <h1 className="nav-link">Voter</h1>
           </NavLink>
           <NavLink to={"/tally-vote"}>
-            <Nav.Link href="#pricing">Résultats</Nav.Link>
+            <h1 className="nav-link">Résultats</h1>
           </NavLink>
         </Nav>
       </Container>
