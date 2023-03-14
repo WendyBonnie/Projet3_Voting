@@ -1,16 +1,16 @@
-function Link({ uri, text }) {
-  return <a href={uri} target="_blank" rel="noreferrer">{text}</a>;
-}
-
 function Footer() {
   return (
-    <footer>
-      <h2>More resources</h2>
-      <Link uri={"https://trufflesuite.com"} text={"Truffle"} />
-      <Link uri={"https://reactjs.org"} text={"React"} />
-      <Link uri={"https://soliditylang.org"} text={"Solidity"} />
-      <Link uri={"https://ethereum.org"} text={"Ethereum"} />
-    </footer >
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-content">
+          <p>© 2023 Bonnie and Cloud. All Rights Reserved.</p>
+          <p>
+            Designed and developed by{" "}
+            <a href="https://www.yourwebsite.com">Your Name</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
 
