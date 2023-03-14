@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import useEth from "../../contexts/EthContext/useEth";
 import utils from "../utils/utils";
 import Button from "../Layout/Button";
-
+import "./Style.css";
 
 function Home() {
   const {
@@ -57,8 +57,8 @@ function Home() {
   };
 
   async function getVoter() {
-    let voter = await utils.getVoter(contract, accounts, setVoter)
-    setVoter(voter)
+    let voter = await utils.getVoter(contract, accounts, setVoter);
+    setVoter(voter);
   }
 
   useEffect(() => {
@@ -72,30 +72,40 @@ function Home() {
   }, [voter]);
 
   return (
-    <Row className="home-container">
-      <Col>
+    <Row className="homeContainer">
+      <Col className="display">
         <Row>
           <Col>
             <h1>Bienvenue sur le vote du comité d'entreprise Lalaland</h1>
           </Col>
         </Row>
-        <Row>
-          <Col> statut de la session de vote</Col>
-        </Row>
-        <Row>
-          <Col>{WorkflowStatus[status]}</Col>
+        <Row className="workflowBox">
+          <Col md={12}>
+            <h3>statut de la session de vote</h3>
+          </Col>
+
+          <Col md={12}>
+            <h3>{WorkflowStatus[status]}</h3>
+          </Col>
         </Row>
         <Row>
           {status != 1 && voter?.isRegistered ? (
-            <Col>Les propositions ne sont pas encore ouvertes</Col>
+            <Col>
+              <h3>Les propositions ne sont pas encore ouvertes</h3>
+            </Col>
           ) : status != 1 && !voter?.isRegistered ? (
-            <Col>Vous n'êtes pas enregistré</Col>
+            <Col>
+              <p>Vous n'êtes pas enregistré</p>
+            </Col>
           ) : (
             status == 1 &&
             voter?.isRegistered && (
               <Col>
                 <h2>Veuillez rentrer une proposition</h2>
-                <input onChange={(e) => setProposition(e.target.value)} />
+                <input
+                  className="my-input"
+                  onChange={(e) => setProposition(e.target.value)}
+                />
                 <Button name={"Ajouter ma proposition"} action={addProposal} />
               </Col>
             )
