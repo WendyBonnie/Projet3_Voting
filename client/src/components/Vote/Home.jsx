@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import useEth from "../../contexts/EthContext/useEth";
 import utils from "../utils/utils";
 import Button from "../Layout/Button";
+import "style.css";
 
 function Home() {
   const {
@@ -71,7 +72,7 @@ function Home() {
   }, [voter]);
 
   return (
-    <Row>
+    <Row className="home-container">
       <Col>
         <Row>
           <Col>
