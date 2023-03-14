@@ -23,7 +23,7 @@ function ColorSchemesExample(props) {
           <NavLink to={"/voting"}>
             <h1 className="nav-link">Voter</h1>
           </NavLink>
-          <NavLink to={"/tally-vote"}>
+          <NavLink to={"/tallyVote"}>
             <h1 className="nav-link">Résultats</h1>
           </NavLink>
         </Nav>
