@@ -129,28 +129,42 @@ function Admin() {
   };
 
   return (
-    <Row>
-      <Col>
-        <h2>Veuillez rajouter des voteurs</h2>
-        <Form>
-          <input
-            onChange={(e) => setKey(e.target.value)}
-            placeholder="ajoutez une adresse"
-          />
-        </Form>
-        <button onClick={addVoter}>Valider</button>
-
-        <h2>Start proposal registering</h2>
-        <Button name={"Start"} action={startProposalRegistering} />
-        <h2>End proposal registering</h2>
-        <Button name={"Done"} action={endProposalRegistering} />
-        <h2>Start voting session</h2>
-        <Button name={"Start"} action={startVotingSession} />
-        <h2>end voting session</h2>
-        <Button name={"Done"} action={endVotingSession} />
-        <h2>Tally Vote</h2>
-        <Button name={"Start"} action={tallyVote} />
-      </Col>
+    <Row className="homeContainer">
+      <Row>
+        <Col>
+          <h2>Start proposal registering</h2>
+          <Button name={"Start"} action={startProposalRegistering} />
+        </Col>
+        <Col>
+          <h2>End proposal registering</h2>
+          <Button name={"Done"} action={endProposalRegistering} />
+        </Col>
+        <Col>
+          <h2>Start voting session</h2>
+          <Button name={"Start"} action={startVotingSession} />
+        </Col>
+        <Col>
+          <h2>end voting session</h2>
+          <Button name={"Done"} action={endVotingSession} />
+        </Col>
+        <Col>
+          <h2>Tally Vote</h2>
+          <Button name={"Start"} action={tallyVote} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h2>Veuillez rajouter des voteurs</h2>
+          <Form>
+            <input
+              className="my-input"
+              onChange={(e) => setKey(e.target.value)}
+              placeholder="ajoutez une adresse"
+            />
+          </Form>
+          <Button name={"Valider"} action={addVoter} />
+        </Col>
+      </Row>
     </Row>
   );
 }
