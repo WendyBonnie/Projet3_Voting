@@ -22,7 +22,7 @@ module.exports = {
       provider: function () {
         return new HDWalletProvider({
           mnemonic: { phrase: `${process.env.MNEMONIC}` },
-          providerOrUrl: `https://mumbai.infura.io/v3/${process.env.INFURA_ID}`,
+          providerOrUrl: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_ID}`,
         });
       },
       network_id: 5,
