@@ -75,6 +75,8 @@ function Voting() {
     }
   }
 
+
+
   useEffect(() => {
     getVoter(), getStatus();
   }, [accounts, status]);
