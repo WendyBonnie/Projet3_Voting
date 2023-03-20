@@ -25,7 +25,7 @@ module.exports = {
           providerOrUrl: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_ID}`,
         });
       },
-      network_id: 5,
+      network_id: 80001,
     },
   },
 
