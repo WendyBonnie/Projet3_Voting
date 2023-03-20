@@ -4,30 +4,26 @@ import useEth from "../../contexts/EthContext/useEth";
 import utils from "../utils/utils";
 import React, { useEffect, useState } from "react";
 
-
 function TallyVote() {
-
   const {
     state: { contract, accounts },
   } = useEth();
 
-
-  const [winner, setWinner] = useState(0)
+  const [winner, setWinner] = useState(0);
 
   async function getWinnerProposals() {
-
     try {
-      let winner = await contract.methods.winningProposalID().call({ from: accounts[0] })
+      let winner = await contract.methods
+        .winningProposalID()
+        .call({ from: accounts[0] });
 
       console.log("winning", winner);
       let proposals = await contract.methods
         .getOneProposal(winner)
-        .call({ from: accounts[0] })
+        .call({ from: accounts[0] });
 
       console.log("props", proposals);
-      setWinner(proposals)
-
-
+      setWinner(proposals);
     } catch (error) {
       console.log(error);
       alert(
@@ -36,19 +32,23 @@ function TallyVote() {
         )[1]
       );
     }
-
   }
 
-
   useEffect(() => {
-    getWinnerProposals()
-
-  }, [])
+    getWinnerProposals();
+  }, []);
 
   return (
-    <Row>
+    <Row className="homeContainer">
       <Col>
-        <h1>VOICI LE GAGNANT : {winner.description} avec {winner.voteCount} voix !</h1>
+        <Row className="justify">
+          <Col md={5} className="workflowBox">
+            <h1>
+              VOICI LE GAGNANT : {winner.description} avec {winner.voteCount}{" "}
+              voix !
+            </h1>
+          </Col>
+        </Row>
       </Col>
     </Row>
   );

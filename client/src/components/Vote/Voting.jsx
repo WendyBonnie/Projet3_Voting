@@ -7,12 +7,13 @@ import Button from "../Layout/Button";
 
 function Voting() {
   const {
-    state: { contract, accounts },
+    state: { contract, accounts, txhash, web3 },
   } = useEth();
   const [voter, setVoter] = useState();
   const [idProposal, setIdProposal] = useState();
   const [proposal, setProposal] = useState("");
   const [status, setStatus] = useState(0);
+  const [eventData, setEventData] = useState(null);
   const [WorkflowStatus, setWorkflowStatus] = useState([
     "RegisteringVoters",
     "ProposalsRegistrationStarted",
@@ -76,12 +77,36 @@ function Voting() {
   }
 
   useEffect(() => {
-    getVoter(), getStatus();
+    getVoter();
+    getStatus();
+    console.log("contract", contract);
   }, [accounts, status]);
 
   useEffect(() => {
     console.log("voter", voter);
   }, [voter]);
+
+  async function getPastEvent() {
+    if (contract) {
+      const deployTx = await web3.eth.getTransaction(txhash);
+      const results = await contract.proposalRegistered("proposal", {
+        fromBlock: 0,
+        toBlock: "latest",
+      });
+      const Transfers = results.map((transfer) => {
+        return console.log("test", transfer);
+      });
+      setEventData(Transfers);
+    }
+  }
+
+  useEffect(() => {
+    getPastEvent();
+  }, [contract]);
+
+  useEffect(() => {
+    console.log("event", eventData);
+  }, [eventData]);
 
   return (
     <Row className="homeContainer">
