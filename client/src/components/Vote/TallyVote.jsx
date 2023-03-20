@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import useEth from "../../contexts/EthContext/useEth";
 import utils from "../utils/utils";
 import React, { useEffect, useState } from "react";
+import "./Style.css";
 
 function TallyVote() {
   const {

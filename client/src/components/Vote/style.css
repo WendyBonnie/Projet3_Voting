@@ -53,6 +53,12 @@ body {
   outline: none;
 }
 
+.justify {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .my-button {
   display: inline-block;
   padding: 12px 24px;

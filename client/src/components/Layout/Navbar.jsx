@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 
 function ColorSchemesExample(props) {
   const { owner, accounts, status } = props;
+
+  console.log("sTAT", status);
   return (
     <Navbar bg="light" variant="light">
       <Container>
@@ -19,13 +21,17 @@ function ColorSchemesExample(props) {
               <h1 className="nav-link">Admin</h1>
             </NavLink>
           ) : null}
+          {status == 4 || status == 5 ? null : (
+            <NavLink to={"/voting"}>
+              <h1 className="nav-link">Voter</h1>
+            </NavLink>
+          )}
 
-          <NavLink to={"/voting"}>
-            <h1 className="nav-link">Voter</h1>
-          </NavLink>
-          <NavLink to={"/tallyVote"}>
-            <h1 className="nav-link">Résultats</h1>
-          </NavLink>
+          {status == 5 && (
+            <NavLink to={"/tallyVote"}>
+              <h1 className="nav-link">Résultats</h1>
+            </NavLink>
+          )}
         </Nav>
       </Container>
     </Navbar>
