@@ -5,21 +5,21 @@ import Button from "../Layout/Button";
 import Form from "react-bootstrap/Form";
 import useEth from "../../contexts/EthContext/useEth";
 
-function Admin() {
+function Admin(props) {
   const {
     state: { contract, accounts },
   } = useEth();
   const [key, setKey] = useState("");
 
   const addVoter = async () => {
-    console.log("key", key);
+
     try {
       if (await contract.methods.addVoter(key).call({ from: accounts[0] })) {
         // let start = await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
         let status = await contract.methods
           .addVoter(key)
           .send({ from: accounts[0] });
-        console.log(status);
+
       }
     } catch (error) {
       console.log(error);
@@ -36,7 +36,7 @@ function Admin() {
         let status = await contract.methods
           .startProposalsRegistering()
           .send({ from: accounts[0] });
-        console.log(status);
+        props.getStatus();
       }
     } catch (error) {
       console.log(error);
@@ -58,7 +58,7 @@ function Admin() {
         let status = await contract.methods
           .endProposalsRegistering()
           .send({ from: accounts[0] });
-        console.log(status);
+        props.getStatus();
       }
     } catch (error) {
       console.log(error);
@@ -78,7 +78,7 @@ function Admin() {
         let status = await contract.methods
           .startVotingSession()
           .send({ from: accounts[0] });
-        console.log(status);
+        props.getStatus();
       }
     } catch (error) {
       console.log(error);
@@ -98,7 +98,7 @@ function Admin() {
         let status = await contract.methods
           .endVotingSession()
           .send({ from: accounts[0] });
-        console.log(status);
+        props.getStatus();
       }
     } catch (error) {
       console.log(error);
@@ -116,7 +116,7 @@ function Admin() {
         let status = await contract.methods
           .tallyVotes()
           .send({ from: accounts[0] });
-        console.log(status);
+        props.getStatus();
       }
     } catch (error) {
       console.log(error);

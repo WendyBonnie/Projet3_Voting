@@ -6,7 +6,7 @@ import utils from "../utils/utils";
 import Button from "../Layout/Button";
 import "../Vote/Style.css";
 
-function Home() {
+function Home(props) {
   const { state: { contract, accounts, txhash, web3 } } = useEth();
   const [status, setStatus] = useState(0);
   const [proposition, setProposition] = useState("");
@@ -45,7 +45,7 @@ function Home() {
         let proposal = await contract.methods
           .addProposal(proposition)
           .send({ from: accounts[0] });
-        console.log(proposal);
+
         setProposition("");
       }
     } catch (error) {
@@ -70,10 +70,11 @@ function Home() {
   useEffect(() => {
     async function getPastEvent() {
       if (contract) {
+        // Quand j'ajoute ces deux lignes je n'ai pas accès à tout les events juste le dernier
         // const deployTx = await web3.eth.getTransaction(txhash)
         // console.log("dTX", deployTx);
         const results = await contract.getPastEvents("ProposalRegistered", { fromBlock: 0, toBlock: "latest" });
-        console.log(results);
+
         const Transfers = results.map((transfer) => {
           let PastE = { proposalId: null, };
           PastE.proposalId = transfer.returnValues.proposalId;
@@ -90,7 +91,7 @@ function Home() {
   useEffect(() => {
     getVoter();
     getStatus();
-    console.log("newEvents", newEvents);
+
 
   }, [accounts, status, newEvents]);
 
