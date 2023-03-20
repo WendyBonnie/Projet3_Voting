@@ -21,7 +21,7 @@ function ColorSchemesExample(props) {
               <h1 className="nav-link">Admin</h1>
             </NavLink>
           ) : null}
-          {status == 4 || status == 5 ? null : (
+          {status !== 3 ? null : (
             <NavLink to={"/voting"}>
               <h1 className="nav-link">Voter</h1>
             </NavLink>
