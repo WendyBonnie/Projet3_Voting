@@ -76,6 +76,8 @@ function Voting() {
     }
   }
 
+
+
   useEffect(() => {
     getVoter();
     getStatus();

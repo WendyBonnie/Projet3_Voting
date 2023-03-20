@@ -7,12 +7,14 @@ import Button from "../Layout/Button";
 import "../Vote/style.css";
 
 function Home() {
-  const {
-    state: { contract, accounts },
-  } = useEth();
+  const { state: { contract, accounts, txhash, web3 } } = useEth();
   const [status, setStatus] = useState(0);
   const [proposition, setProposition] = useState("");
   const [voter, setVoter] = useState({});
+
+  // PARTIE EVENT
+
+  const [newEvents, setNewEvents] = useState([]);
 
   const [WorkflowStatus, setWorkflowStatus] = useState([
     "RegisteringVoters",
@@ -61,11 +63,36 @@ function Home() {
     setVoter(voter);
   }
 
+  async function renderProposals() {
+    newEvents.map()
+  }
+
+  useEffect(() => {
+    async function getPastEvent() {
+      if (contract) {
+        // const deployTx = await web3.eth.getTransaction(txhash)
+        // console.log("dTX", deployTx);
+        const results = await contract.getPastEvents("ProposalRegistered", { fromBlock: 0, toBlock: "latest" });
+        console.log(results);
+        const Transfers = results.map((transfer) => {
+          let PastE = { proposalId: null, };
+          PastE.proposalId = transfer.returnValues.proposalId;
+
+          return PastE;
+        });
+        setNewEvents(Transfers);
+      }
+    }
+    getPastEvent();
+  }, [contract]);
+
+
   useEffect(() => {
     getVoter();
     getStatus();
-    console.log("status home", status);
-  }, [accounts, status]);
+    console.log("newEvents", newEvents);
+
+  }, [accounts, status, newEvents]);
 
   useEffect(() => {
     console.log("voter", voter?.isRegistered);
