@@ -14,6 +14,7 @@ function Voting() {
   const [proposal, setProposal] = useState("");
   const [status, setStatus] = useState(0);
   const [eventData, setEventData] = useState(null);
+  const [allProposal, setAllProposal] = useState([])
   const [WorkflowStatus, setWorkflowStatus] = useState([
     "RegisteringVoters",
     "ProposalsRegistrationStarted",
@@ -38,13 +39,13 @@ function Voting() {
     setVoter(voter);
   }
 
-  async function setVoting() {
+  async function setVoting(id) {
     try {
       if (
-        await contract.methods.setVote(idProposal).call({ from: accounts[0] })
+        await contract.methods.setVote(id).call({ from: accounts[0] })
       ) {
         let vote = await contract.methods
-          .setVote(idProposal)
+          .setVote(id)
           .send({ from: accounts[0] });
         console.log(vote);
       }
@@ -58,52 +59,61 @@ function Voting() {
     }
   }
 
+
+
   async function getProposals() {
-    try {
+    return eventData?.map(async (element) => {
       let proposals = await contract.methods
-        .getOneProposal(idProposal)
+        .getOneProposal(element.proposalId)
         .call({ from: accounts[0] });
 
-      console.log(proposals);
-      setProposal(proposals);
-    } catch (error) {
-      console.log(error);
-      alert(
-        error.message.split(
-          "VM Exception while processing transaction: revert"
-        )[1]
-      );
-    }
+      allProposal.push(proposals)
+    })
   }
 
+  function renderProposal() {
+    return allProposal.map((el, index) => {
+
+      return (<div key={index}> <Col md={12} className="workflowBox">
+
+        <h1>{el.description} </h1>
+      </Col> <Button name={"Voter"} action={() => setVoting(eventData[index].proposalId)} /></div>)
+    })
+  }
+
+
+  useEffect(() => {
+    async function getPastEvent() {
+      if (contract) {
+        // const deployTx = await web3.eth.getTransaction(txhash)
+        // console.log("dTX", deployTx);
+        const results = await contract.getPastEvents("ProposalRegistered", { fromBlock: 0, toBlock: "latest" });
+        console.log(results);
+        const Transfers = results.map((transfer) => {
+          let PastE = { proposalId: null, };
+          PastE.proposalId = transfer.returnValues.proposalId;
+
+          return PastE;
+        });
+        setEventData(Transfers);
+      }
+    }
+    getPastEvent();
+  }, [contract]);
 
 
   useEffect(() => {
     getVoter();
     getStatus();
-    console.log("contract", contract);
+    getProposals()
   }, [accounts, status]);
 
-  useEffect(() => {
-    console.log("voter", voter);
-  }, [voter]);
 
-  async function getPastEvent() {
-    if (contract) {
-      const deployTx = await web3.eth.getTransaction(txhash);
-      const results = await contract.proposalRegistered("proposal", {
-        fromBlock: 0,
-        toBlock: "latest",
-      });
-      const Transfers = results.map((transfer) => {
-        return console.log("test", transfer);
-      });
-      setEventData(Transfers);
-    }
-  }
+
+
 
   useEffect(() => {
-    getPastEvent();
+
   }, [contract]);
 
   useEffect(() => {
@@ -116,29 +126,30 @@ function Voting() {
         <Row className="divPropal">
           <Col>
             <h1>Veuillez choisir le numéro de proposition</h1>
-            <input
-              className="my-input"
-              onChange={(e) => {
-                setIdProposal(e.target.value);
-              }}
-              type="number"
-              min={1}
-              placeholder="Numéro de proposals"></input>
-            <Button name={"Valider"} action={getProposals} />
+
           </Col>
         </Row>
         <Row>
-          <Col md={12} className="workflowBox">
+          {renderProposal()}
+        </Row>
+        <Row>
+          {/* <Col md={12} className="workflowBox">
             <h1>Proposition sélectionnée: </h1>
             <h1>{proposal.description} </h1>
-          </Col>
+          </Col> */}
           <Col md={12}>
+
+
             {proposal != "" && status == 3 && (
               <Button name={"Voter"} action={setVoting} />
             )}
           </Col>
         </Row>
+
+
       </Col>
+
+
     </Row>
   );
 }
