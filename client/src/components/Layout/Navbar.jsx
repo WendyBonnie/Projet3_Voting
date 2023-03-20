@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,7 +7,16 @@ import { NavLink } from "react-router-dom";
 function ColorSchemesExample(props) {
   const { owner, accounts, status } = props;
 
-  console.log("sTAT", status);
+  const [WorkflowStatus, setWorkflowStatus] = useState([
+    "RegisteringVoters",
+    "ProposalsRegistrationStarted",
+    "ProposalsRegistrationEnded",
+    "VotingSessionStarted",
+    "VotingSessionEnded",
+    "VotesTallied",
+  ]);
+
+  console.log("sTAT", status, accounts);
   return (
     <Navbar bg="light" variant="light">
       <Container>
@@ -32,6 +41,9 @@ function ColorSchemesExample(props) {
               <h1 className="nav-link">Résultats</h1>
             </NavLink>
           )}
+
+          <h1>{accounts ? accounts[0] : null}</h1>
+          <span>{WorkflowStatus[status]}</span>
         </Nav>
       </Container>
     </Navbar>
