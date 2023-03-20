@@ -6,7 +6,7 @@ function Footer() {
           <p>© 2023 Bonnie and Cloud. All Rights Reserved.</p>
           <p>
             Designed and developed by{" "}
-            <a href="https://www.yourwebsite.com">
+            <a href="https://bonnie-and-cloud.com">
               Wendy Montagnon & Arnaud Puaud
             </a>
             .

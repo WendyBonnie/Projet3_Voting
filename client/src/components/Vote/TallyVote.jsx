@@ -5,7 +5,7 @@ import utils from "../utils/utils";
 import React, { useEffect, useState } from "react";
 import "./Style.css";
 
-function TallyVote() {
+function TallyVote(props) {
   const {
     state: { contract, accounts },
   } = useEth();
@@ -18,12 +18,12 @@ function TallyVote() {
         .winningProposalID()
         .call({ from: accounts[0] });
 
-      console.log("winning", winner);
+
       let proposals = await contract.methods
         .getOneProposal(winner)
         .call({ from: accounts[0] });
 
-      console.log("props", proposals);
+
       setWinner(proposals);
     } catch (error) {
       console.log(error);

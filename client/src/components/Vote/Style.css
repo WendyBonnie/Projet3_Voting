@@ -15,6 +15,20 @@ body {
   align-items: center;
 }
 
+.votingContainer {
+  text-align: center;
+  background-image: url("../../../public/background.jpeg");
+ 
+  width: 100vw;
+  background-size: cover;
+  margin-left: 0px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
 .homeContainer h3 {
   color: white;
 }

@@ -46,23 +46,21 @@ function Navigation() {
     // getVoter();
     getStatus();
     getOwner();
-  }, [accounts]);
+  }, [accounts, status]);
 
-  useEffect(() => {
-    console.log("accounts", accounts);
-    console.log("status", status);
-    console.log("owner", owner);
-  }, [voter, status, owner]);
+  useEffect(() => { console.log("sss", status); }, [status])
+
+
 
   return (
     <Router>
       <NavBar owner={owner} accounts={accounts} status={status} />
       <div>
         <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/voting" element={<Voting />} />
-          <Route path="/tallyVote" element={<TallyVote />} />
+          <Route path="/" exact element={<Home getStatus={getStatus} />} />
+          <Route path="/admin" element={<Admin getStatus={getStatus} />} />
+          <Route path="/voting" element={<Voting getStatus={getStatus} />} />
+          <Route path="/tallyVote" element={<TallyVote getStatus={getStatus} />} />
         </Routes>
       </div>
       <Footer />

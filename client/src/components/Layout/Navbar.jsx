@@ -16,36 +16,46 @@ function ColorSchemesExample(props) {
     "VotesTallied",
   ]);
 
-  console.log("sTAT", status, accounts);
+  useEffect(() => {
+    
+  }, [status])
+
+
   return (
     <Navbar bg="light" variant="light">
-      <Container>
-        <NavLink className="nav-link" to={"/"}>
-          <h1>Home</h1>
-        </NavLink>
+      <Container >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <NavLink className="nav-link" to={"/"}>
+            <h1>Home</h1>
+          </NavLink>
 
-        <Nav className="me-auto">
-          {accounts?.includes(owner) ? (
-            <NavLink to={"/admin"}>
-              <h1 className="nav-link">Admin</h1>
-            </NavLink>
-          ) : null}
-          {status !== 3 ? null : (
-            <NavLink to={"/voting"}>
-              <h1 className="nav-link">Voter</h1>
-            </NavLink>
-          )}
+          <Nav className="me-auto">
+            {accounts?.includes(owner) ? (
+              <NavLink to={"/admin"}>
+                <h1 className="nav-link">Admin</h1>
+              </NavLink>
+            ) : null}
+            {status != 3 ? null : (
+              <NavLink to={"/voting"}>
+                <h1 className="nav-link">Voter</h1>
+              </NavLink>
+            )}
 
-          {status == 5 && (
-            <NavLink to={"/tallyVote"}>
-              <h1 className="nav-link">Résultats</h1>
-            </NavLink>
-          )}
+            {status == 5 && (
+              <NavLink to={"/tallyVote"}>
+                <h1 className="nav-link">Résultats</h1>
+              </NavLink>
+            )}
 
-          <h1>{accounts ? accounts[0] : null}</h1>
-          <span>{WorkflowStatus[status]}</span>
-        </Nav>
+
+          </Nav>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span>{accounts ? accounts[0] : null}</span>
+          <span >{"Status du vote : " + WorkflowStatus[status]}</span>
+        </div>
       </Container>
+
     </Navbar>
   );
 }

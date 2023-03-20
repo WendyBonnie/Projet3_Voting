@@ -5,7 +5,7 @@ import utils from "../utils/utils";
 import React, { useEffect, useState } from "react";
 import Button from "../Layout/Button";
 
-function Voting() {
+function Voting(props) {
   const {
     state: { contract, accounts, txhash, web3 },
   } = useEth();
@@ -74,10 +74,12 @@ function Voting() {
   function renderProposal() {
     return allProposal.map((el, index) => {
 
-      return (<div key={index}> <Col md={12} className="workflowBox">
-
-        <h1>{el.description} </h1>
-      </Col> <Button name={"Voter"} action={() => setVoting(eventData[index].proposalId)} /></div>)
+      return (<div key={index}>
+        <Col md={12} className="workflowBox">
+          <h1>{el.description} </h1>
+        </Col>
+        <Button name={"Voter"} action={() => setVoting(eventData[index].proposalId)} />
+      </div>)
     })
   }
 
@@ -106,22 +108,18 @@ function Voting() {
     getVoter();
     getStatus();
     getProposals()
-  }, [accounts, status]);
+  }, [accounts, status, allProposal]);
 
 
 
 
 
-  useEffect(() => {
 
-  }, [contract]);
 
-  useEffect(() => {
-    console.log("event", eventData);
-  }, [eventData]);
+
 
   return (
-    <Row className="homeContainer">
+    <Row className="votingContainer">
       <Col className="display">
         <Row className="divPropal">
           <Col>
